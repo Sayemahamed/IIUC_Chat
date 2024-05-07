@@ -1,7 +1,10 @@
-export default function App() {
+import { Routes, Route } from "react-router-dom";
+const App = () => {
   return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<div>App</div>} />
+      <Route path="/chat" element={<div>Chat</div>} />
+    </Routes>
   );
-}
+};
+export default App;
