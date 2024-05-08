@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { auth } from "../firebase/config";
+import img from "./backGround.jpg";
 import { Link } from "react-router-dom";
 import {
   GoogleAuthProvider,
   signInWithRedirect,
   onAuthStateChanged,
 } from "firebase/auth";
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 const Welcome = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(true);
 
@@ -29,17 +30,34 @@ const Welcome = () => {
       alignItems="center"
       direction="column"
       spacing={2}
-      bgcolor={"#f5f5f5"}
       height={"100vh"}
+      style={{
+        backgroundImage: `url(${img})`,
+        backgroundSize: "cover",
+      }}
     >
       <Grid item>
-        <h1 style={{ textAlign: "center", fontFamily: "Roboto" }}>
+        <h1
+          style={{
+            textAlign: "center",
+            fontFamily: "Roboto",
+            color: "white",
+            scale: "1.5",
+          }}
+        >
           Welcome To
         </h1>
       </Grid>
       <Grid item>
-        <h1 style={{ textAlign: "center", fontFamily: "Roboto" }}>
-         IIUC Chat
+        <h1
+          style={{
+            textAlign: "center",
+            fontFamily: "Roboto",
+            color: "white",
+            scale: "1.5",
+          }}
+        >
+          IIUC Chat
         </h1>
       </Grid>
       <Grid item>
