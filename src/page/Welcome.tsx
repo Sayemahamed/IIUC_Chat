@@ -25,13 +25,22 @@ const Welcome = () => {
   return (
     <Grid
       container
-      justifyContent="center"
+      justifyContent="flex-start"
       alignItems="center"
       direction="column"
       spacing={2}
+      bgcolor={"#f5f5f5"}
+      height={"100vh"}
     >
       <Grid item>
-        <h1 style={{ textAlign: "center",  fontFamily: "Roboto" }}>Welcome to IIUC Chat</h1>
+        <h1 style={{ textAlign: "center", fontFamily: "Roboto" }}>
+          Welcome To
+        </h1>
+      </Grid>
+      <Grid item>
+        <h1 style={{ textAlign: "center", fontFamily: "Roboto" }}>
+         IIUC Chat
+        </h1>
       </Grid>
       <Grid item>
         {authenticated ? (
