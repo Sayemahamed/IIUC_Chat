@@ -32,7 +32,7 @@ const ChatNode = ({
               {name.charAt(0)}
             </Avatar>
           }
-          color={"white"}
+          titleTypographyProps={{color:"white"}}
           title={name}
         ></CardHeader>
         {image && <CardMedia component={"img"} image={image} height={300} />}
