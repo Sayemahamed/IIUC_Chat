@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { database } from "../firebase/config";
-import { get, ref } from "firebase/database";
+import { get, onValue, push, ref } from "firebase/database";
 import { Grid, TextField } from "@mui/material";
 import ChatNode from "../Components/ChatNode";
 
@@ -11,6 +11,13 @@ interface userType {
   photoURL: string;
   email: string;
 }
+interface chatType {
+  uid: string;
+  avatar: string;
+  name: string;
+  message: string;
+  image: string;
+}
 const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
   const [userData, setUserData] = useState<userType>({
     name: "",
@@ -18,6 +25,8 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
     photoURL: "",
     email: "",
   });
+  const [chatNodeData, setChatNodeData] = useState<chatType[]>([]);
+  const [chatData, setChatData] = useState("");
   const navigation = useNavigate();
   useEffect(() => {
     get(ref(database, "users/" + userID)).then((snapshot) => {
@@ -28,10 +37,14 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
           photoURL: snapshot.val().photoURL,
           email: snapshot.val().email,
         });
-        console.log(chatNode);
       } else navigation("/");
     });
     if (userID === "") navigation("/");
+    onValue(ref(database, chatNode), (snapshot) => {
+      if (snapshot.exists()) {
+        setChatNodeData(Object.values(snapshot.val()));
+      }
+    });
   }, []);
   return (
     <>
@@ -44,12 +57,21 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
         />{" "}
       </Grid>
       <TextField
-        // onInput={(e) => console.log(e.target)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            navigation("/");
+        onChange={(event) => setChatData(event.target.value)}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" && chatData !== "") {
+            push(ref(database, chatNode), {
+              uid: userData.uid,
+              avatar: userData.photoURL,
+              name: userData.name,
+              message: chatData,
+              image: "",
+            });
+            setChatData("");
           }
         }}
+        focused={chatData !== ""}
+        value={chatData}
         id="standard-basic"
         label="Type Your message"
         variant="standard"
