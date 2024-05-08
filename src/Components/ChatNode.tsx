@@ -20,9 +20,9 @@ const ChatNode = ({
   image: string;
 }) => {
   return (
-    <Grid item xs={12} md={11} lg={10} sx={{ mx: "auto" }} >
+    <Grid item xs={12} md={11} lg={10} sx={{ mx: "auto" }}>
       <Card
-        sx={{ maxWidth: 1200 ,backgroundColor:"transparent"}}
+        sx={{ maxWidth: 1200, backgroundColor: "transparent" }}
         variant="elevation"
         elevation={10}
       >
@@ -32,6 +32,7 @@ const ChatNode = ({
               {name.charAt(0)}
             </Avatar>
           }
+          color={"white"}
           title={name}
         ></CardHeader>
         {image && <CardMedia component={"img"} image={image} height={300} />}
@@ -40,7 +41,7 @@ const ChatNode = ({
             <Typography
               variant="body1"
               color={"white"}
-            //   bgcolor={"teal"}
+              //   bgcolor={"teal"}
             >
               {message}
             </Typography>
