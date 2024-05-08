@@ -11,6 +11,7 @@ const Welcome = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(true);
   const getAuth = async () => {
     await signInWithRedirect(auth, new GoogleAuthProvider());
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   };
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -26,10 +27,10 @@ const Welcome = () => {
       <h1>Welcome</h1>
       {authenticated ? (
         <Link to={"/chat"}>
-          <Button>Chat</Button>
+          <Button>Enter</Button>
         </Link>
       ) : (
-        <Button onClick={getAuth}>Login</Button>
+        <Button onClick={getAuth}>Sign In</Button>
       )}
     </>
   );

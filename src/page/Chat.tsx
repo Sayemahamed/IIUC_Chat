@@ -1,18 +1,11 @@
-import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase/config";
 
-const Chat = () => {
+const Chat = ({ userID }: { userID: string }) => {
   const navigation = useNavigate();
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-      } else {
-        navigation("/");
-      }
-    });
+    if (userID === "") navigation("/");
   }, []);
-  return 
+  return <div>chat with {userID}</div>;
 };
 export default Chat;

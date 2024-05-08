@@ -3,6 +3,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
 import { useEffect, useState } from "react";
 import Welcome from "./page/Welcome";
+import Chat from "./page/Chat";
 
 const App = () => {
   const [userID, setUserID] = useState<string>("");
@@ -18,7 +19,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Welcome />} />
-      <Route path="/chat" element={<div>Chat with {userID}</div>} />
+      <Route path="/chat" element={<Chat userID={userID} />} />
     </Routes>
   );
 };
