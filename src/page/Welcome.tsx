@@ -6,12 +6,12 @@ import {
   signInWithRedirect,
   onAuthStateChanged,
 } from "firebase/auth";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 const Welcome = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(true);
+
   const getAuth = async () => {
     await signInWithRedirect(auth, new GoogleAuthProvider());
-    await new Promise((resolve) => setTimeout(resolve, 1000));
   };
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -31,7 +31,7 @@ const Welcome = () => {
       spacing={2}
     >
       <Grid item>
-        <h1 style={{ textAlign: "center", fontFamily: "roboto" }}>Welcome</h1>
+        <h1 style={{ textAlign: "center",  fontFamily: "Roboto" }}>Welcome to IIUC Chat</h1>
       </Grid>
       <Grid item>
         {authenticated ? (
