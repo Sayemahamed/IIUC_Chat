@@ -49,12 +49,15 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
   return (
     <>
       <Grid container gap={1}>
-        <ChatNode
-          avatar={userData.photoURL}
-          name={userData.name}
-          message="Hello"
-          image={""}
-        />{" "}
+        {chatNodeData.map((data) => (
+          <ChatNode
+            key={data.uid}
+            avatar={data.avatar}
+            name={data.name}
+            message={data.message}
+            image={data.image}
+          />
+        ))}
       </Grid>
       <TextField
         onChange={(event) => setChatData(event.target.value)}
