@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { database } from "../firebase/config";
 import { get, ref } from "firebase/database";
-import { Grid } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import ChatNode from "../Components/ChatNode";
 
 interface userType {
@@ -34,122 +34,27 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
     if (userID === "") navigation("/");
   }, []);
   return (
-    <Grid container>
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
-      />{" "}
-      <ChatNode
-        avatar={userData.photoURL}
-        name={userData.name}
-        message="Hello"
-        image={""}
+    <>
+      <Grid container gap={1}>
+        <ChatNode
+          avatar={userData.photoURL}
+          name={userData.name}
+          message="Hello"
+          image={""}
+        />{" "}
+      </Grid>
+      <TextField
+        // onInput={(e) => console.log(e.target)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            navigation("/");
+          }
+        }}
+        id="standard-basic"
+        label="Type Your message"
+        variant="standard"
       />
-    </Grid>
+    </>
   );
 };
 export default Chat;
