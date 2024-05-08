@@ -1,28 +1,24 @@
 import { Routes, Route } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
-import {
-  GoogleAuthProvider,
-  signInWithRedirect,
-  onAuthStateChanged,
-} from "firebase/auth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Welcome from "./page/Welcome";
+
 const App = () => {
+  const [userID, setUserID] = useState<string>("");
   useEffect(() => {
-    const getAuth = async () => {
-      await signInWithRedirect(auth, new GoogleAuthProvider());
-    };
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
+        setUserID(user.uid);
       } else {
-        getAuth();
+        setUserID("");
       }
     });
   }, []);
   return (
     <Routes>
-      <Route path="/" element={<div>App</div>} />
-      <Route path="/chat" element={<div>Chat</div>} />
+      <Route path="/" element={<Welcome />} />
+      <Route path="/chat" element={<div>Chat with {userID}</div>} />
     </Routes>
   );
 };
