@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { auth } from "../firebase/config";
-import img from "./backGround.jpg";
 import { Link } from "react-router-dom";
 import {
   GoogleAuthProvider,
@@ -24,60 +23,56 @@ const Welcome = () => {
     });
   }, []);
   return (
-    <div
-      style={{
-        backgroundImage: `url(${img})`,
-        backgroundSize: "cover",
-        height: "100svh",
-      }}
+    <Grid
+      container
+      justifyContent="flex-start"
+      alignItems="center"
+      direction="column"
+      spacing={2}
     >
-      <Grid
-        container
-        justifyContent="flex-start"
-        alignItems="center"
-        direction="column"
-        spacing={2}
-        borderRadius={"10px"}
-      >
-        <Grid item>
-          <h1
-            style={{
-              textAlign: "center",
-              fontFamily: "Roboto",
-              color: "white",
-              scale: "1.5",
-            }}
-          >
-            Welcome To
-          </h1>
-        </Grid>
-        <Grid item>
-          <h1
-            style={{
-              textAlign: "center",
-              fontFamily: "Roboto",
-              color: "white",
-              scale: "1.5",
-            }}
-          >
-            IIUC Chat
-          </h1>
-        </Grid>
-        <Grid item>
-          {authenticated ? (
-            <Link to={"/chat"}>
-              <Button size="large" variant="contained" color="success">
-                Enter
-              </Button>
-            </Link>
-          ) : (
-            <Button size="large" variant="contained" color="success" onClick={getAuth}>
-              Sign In
-            </Button>
-          )}
-        </Grid>
+      <Grid item>
+        <h1
+          style={{
+            textAlign: "center",
+            fontFamily: "Roboto",
+            color: "white",
+            scale: "1.5",
+          }}
+        >
+          Welcome To
+        </h1>
       </Grid>
-    </div>
+      <Grid item>
+        <h1
+          style={{
+            textAlign: "center",
+            fontFamily: "Roboto",
+            color: "white",
+            scale: "1.5",
+          }}
+        >
+          IIUC Chat
+        </h1>
+      </Grid>
+      <Grid item>
+        {authenticated ? (
+          <Link to={"/chat"}>
+            <Button size="large" variant="contained" color="success">
+              Enter
+            </Button>
+          </Link>
+        ) : (
+          <Button
+            size="large"
+            variant="contained"
+            color="success"
+            onClick={getAuth}
+          >
+            Sign In
+          </Button>
+        )}
+      </Grid>
+    </Grid>
   );
 };
 export default Welcome;
