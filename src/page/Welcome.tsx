@@ -24,56 +24,60 @@ const Welcome = () => {
     });
   }, []);
   return (
-    <Grid
-      container
-      justifyContent="flex-start"
-      alignItems="center"
-      direction="column"
-      spacing={2}
-
+    <div
       style={{
         backgroundImage: `url(${img})`,
         backgroundSize: "cover",
+        height: "100svh",
       }}
     >
-      <Grid item>
-        <h1
-          style={{
-            textAlign: "center",
-            fontFamily: "Roboto",
-            color: "white",
-            scale: "1.5",
-          }}
-        >
-          Welcome To
-        </h1>
-      </Grid>
-      <Grid item>
-        <h1
-          style={{
-            textAlign: "center",
-            fontFamily: "Roboto",
-            color: "white",
-            scale: "1.5",
-          }}
-        >
-          IIUC Chat
-        </h1>
-      </Grid>
-      <Grid item>
-        {authenticated ? (
-          <Link to={"/chat"}>
-            <Button variant="contained" color="success">
-              Enter
+      <Grid
+        container
+        justifyContent="flex-start"
+        alignItems="center"
+        direction="column"
+        spacing={2}
+        borderRadius={"10px"}
+      >
+        <Grid item>
+          <h1
+            style={{
+              textAlign: "center",
+              fontFamily: "Roboto",
+              color: "white",
+              scale: "1.5",
+            }}
+          >
+            Welcome To
+          </h1>
+        </Grid>
+        <Grid item>
+          <h1
+            style={{
+              textAlign: "center",
+              fontFamily: "Roboto",
+              color: "white",
+              scale: "1.5",
+            }}
+          >
+            IIUC Chat
+          </h1>
+        </Grid>
+        <Grid item>
+          {authenticated ? (
+            <Link to={"/chat"}>
+              <Button size="large" variant="contained" color="success">
+                Enter
+              </Button>
+            </Link>
+          ) : (
+            <Button size="large" variant="contained" color="success" onClick={getAuth}>
+              Sign In
             </Button>
-          </Link>
-        ) : (
-          <Button variant="contained" color="success" onClick={getAuth}>
-            Sign In
-          </Button>
-        )}
+          )}
+        </Grid>
       </Grid>
-    </Grid>
+    </div>
   );
 };
 export default Welcome;
