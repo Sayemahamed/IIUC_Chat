@@ -75,7 +75,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
         }}
         multiline
         fullWidth
-        sx={{  position: "fixed", bottom: "0", my: 2, mx: "auto" }}
+        sx={{ position: "fixed", bottom: "0", my: 2, mx: "auto" }}
         focused={chatData !== ""}
         value={chatData}
         id="standard-basic"
