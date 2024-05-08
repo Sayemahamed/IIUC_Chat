@@ -39,7 +39,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
         avatar={userData.photoURL}
         name={userData.name}
         message="Hello"
-        image={"https://source.unsplash.com/random"}
+        image={""}
       />
     </Grid>
   );

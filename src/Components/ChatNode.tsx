@@ -24,7 +24,7 @@ const ChatNode = ({
       <Card
         sx={{ maxWidth: 1200, backgroundColor: "transparent" }}
         variant="elevation"
-        elevation={10}
+        elevation={20}
       >
         <CardHeader
           avatar={
@@ -32,16 +32,18 @@ const ChatNode = ({
               {name.charAt(0)}
             </Avatar>
           }
-          titleTypographyProps={{color:"white"}}
+          titleTypographyProps={{ color: "white" }}
           title={name}
         ></CardHeader>
         {image && <CardMedia component={"img"} image={image} height={300} />}
         <CardContent>
           {message && (
             <Typography
+              borderRadius={2}
+              p={1}
               variant="body1"
               color={"white"}
-              //   bgcolor={"teal"}
+              bgcolor={"rgba(25, 118, 210, 0.2)"}
             >
               {message}
             </Typography>
