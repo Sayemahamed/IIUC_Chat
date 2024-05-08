@@ -2,7 +2,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { database } from "../firebase/config";
 import { get, ref } from "firebase/database";
-import { Avatar, Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
+import {
+  Avatar,
+  Card,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@mui/material";
 
 interface userType {
   name: string;
@@ -31,10 +39,6 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
     });
     if (userID === "") navigation("/");
   }, []);
-  useEffect(() => {
-    console.log(userData);
-    console.log(chatNode);
-  }, [userData]);
   return (
     <Grid container>
       <Grid item>
@@ -47,9 +51,15 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
             }
             title={userData.name}
           ></CardHeader>
+          <CardMedia component={"img"}
+          height={300}
+          image="https://source.unsplash.com/random"
+          ></CardMedia>
           <CardContent>
-            <Typography variant="body2" color={"GrayText"}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, repellendus dolores sit quis vel voluptate dicta consectetur in rerum officiis?
+            <Typography variant="button" color={"GrayText"}>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam,
+              repellendus dolores sit quis vel voluptate dicta consectetur in
+              rerum officiis?
             </Typography>
           </CardContent>
         </Card>
