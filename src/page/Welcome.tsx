@@ -6,7 +6,7 @@ import {
   signInWithRedirect,
   onAuthStateChanged,
 } from "firebase/auth";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 const Welcome = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(true);
   const getAuth = async () => {
@@ -23,16 +23,26 @@ const Welcome = () => {
     });
   }, []);
   return (
-    <>
-      <h1>Welcome</h1>
-      {authenticated ? (
-        <Link to={"/chat"}>
-          <Button>Enter</Button>
-        </Link>
-      ) : (
-        <Button onClick={getAuth}>Sign In</Button>
-      )}
-    </>
+    <Grid
+      container
+      justifyContent="center"
+      alignItems="center"
+      direction="column"
+      spacing={2}
+    >
+      <Grid item>
+        <h1 style={{ textAlign: "center", fontFamily: "roboto" }}>Welcome</h1>
+      </Grid>
+      <Grid item>
+        {authenticated ? (
+          <Link to={"/chat"}>
+            <Button>Enter</Button>
+          </Link>
+        ) : (
+          <Button onClick={getAuth}>Sign In</Button>
+        )}
+      </Grid>
+    </Grid>
   );
 };
 export default Welcome;
