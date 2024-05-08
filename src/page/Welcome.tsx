@@ -30,7 +30,7 @@ const Welcome = () => {
       alignItems="center"
       direction="column"
       spacing={2}
-      height={"100vh"}
+
       style={{
         backgroundImage: `url(${img})`,
         backgroundSize: "cover",
@@ -63,10 +63,14 @@ const Welcome = () => {
       <Grid item>
         {authenticated ? (
           <Link to={"/chat"}>
-            <Button>Enter</Button>
+            <Button variant="contained" color="success">
+              Enter
+            </Button>
           </Link>
         ) : (
-          <Button onClick={getAuth}>Sign In</Button>
+          <Button variant="contained" color="success" onClick={getAuth}>
+            Sign In
+          </Button>
         )}
       </Grid>
     </Grid>
