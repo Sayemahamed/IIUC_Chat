@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { database } from "../firebase/config";
 import { get, ref } from "firebase/database";
-import { Avatar, Button, Card, CardHeader, Grid } from "@mui/material";
+import { Avatar, Card, CardHeader, Grid } from "@mui/material";
 
 interface userType {
   name: string;
