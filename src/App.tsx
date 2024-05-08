@@ -19,7 +19,10 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Welcome />} />
-      <Route path="/chat" element={<Chat userID={userID} />} />
+      <Route
+        path="/chat"
+        element={<Chat chatNode={"global"} userID={userID} />}
+      />
     </Routes>
   );
 };

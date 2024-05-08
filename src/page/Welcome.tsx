@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { auth } from "../firebase/config";
 import { Link } from "react-router-dom";
+import { Button, Grid } from "@mui/material";
+import { database } from "../firebase/config";
 import {
   GoogleAuthProvider,
   signInWithRedirect,
   onAuthStateChanged,
 } from "firebase/auth";
-import { Button, Grid } from "@mui/material";
+import { ref, get, set } from "firebase/database";
 const Welcome = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(true);
 
@@ -17,6 +19,18 @@ const Welcome = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthenticated(true);
+        get(ref(database, "users/" + user.uid)).then((snapshot) => {
+          if (!snapshot.exists()) {
+            set(ref(database, "users/" + user.uid), {
+              uid: user.uid,
+              name: user.displayName,
+              email: user.email,
+              photoURL: user.photoURL,
+              friends: [],
+              conversations: ["global"],
+            });
+          }
+        });
       } else {
         setAuthenticated(false);
       }
@@ -51,7 +65,7 @@ const Welcome = () => {
             scale: "1.5",
           }}
         >
-          IIUC Chat
+          IIUC CHAT
         </h1>
       </Grid>
       <Grid item>
@@ -69,6 +83,18 @@ const Welcome = () => {
             onClick={getAuth}
           >
             Sign In
+          </Button>
+        )}
+      </Grid>
+      <Grid item>
+        {authenticated && (
+          <Button
+            size="large"
+            variant="outlined"
+            color="secondary"
+            onClick={getAuth}
+          >
+            Switch User
           </Button>
         )}
       </Grid>
