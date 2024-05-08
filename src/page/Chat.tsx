@@ -35,6 +35,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
           photoURL: snapshot.val().photoURL,
           email: snapshot.val().email,
         });
+        console.log(chatNode);
       } else navigation("/");
     });
     if (userID === "") navigation("/");
