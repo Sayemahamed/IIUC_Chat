@@ -62,7 +62,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
       <TextField
         onChange={(event) => setChatData(event.target.value)}
         onKeyDown={(event) => {
-          if (event.key === "Enter" && chatData !== "") {
+          if (event.key === "Enter" && chatData.trim() !== "") {
             push(ref(database, chatNode), {
               uid: userData.uid,
               avatar: userData.photoURL,
@@ -75,12 +75,19 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
         }}
         multiline
         fullWidth
-        sx={{ position: "fixed", bottom: "0", my: 2, mx: "auto" }}
+        sx={{
+          position: "fixed",
+          bottom: "0",
+          my: 2,
+          mx: "auto",
+          color: "white",
+        }}
         focused={chatData !== ""}
         value={chatData}
+        color="success"
         id="standard-basic"
         label="Type Your message"
-        variant="standard"
+        variant="filled"
       />
     </>
   );
