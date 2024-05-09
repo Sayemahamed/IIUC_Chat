@@ -8,7 +8,7 @@ import {
   signInWithRedirect,
   onAuthStateChanged,
 } from "firebase/auth";
-import { ref, get, set } from "firebase/database";
+import { ref, get, set, update } from "firebase/database";
 const Welcome = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(true);
 
@@ -28,6 +28,10 @@ const Welcome = () => {
               photoURL: user.photoURL,
               friends: [],
               conversations: ["global"],
+            });
+          } else {
+            update(ref(database, "users/" + user.uid), {
+              photoURL: user.photoURL,
             });
           }
         });
