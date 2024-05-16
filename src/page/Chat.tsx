@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { database } from "../firebase/config";
 import { get, onValue, push, ref } from "firebase/database";
 import { Divider, Grid, IconButton, InputBase, Paper } from "@mui/material";
-import DirectionsIcon from "@mui/icons-material/Directions";
 import ChatNode from "../Components/ChatNode";
-
+import AddIcon from '@mui/icons-material/Add';
 interface userType {
   name: string;
   uid: string;
@@ -92,7 +91,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
         />
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
         <IconButton color="primary" sx={{ p: "10px" }}>
-          <DirectionsIcon />
+          <AddIcon />
         </IconButton>
       </Paper>
     </>
