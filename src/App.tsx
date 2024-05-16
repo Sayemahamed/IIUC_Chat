@@ -4,6 +4,7 @@ import { auth } from "./firebase/config";
 import { useEffect, useState } from "react";
 import Welcome from "./page/Welcome";
 import Chat from "./page/Chat";
+import Home from "./page/Home";
 
 const App = () => {
   const [userID, setUserID] = useState<string>("");
@@ -23,6 +24,7 @@ const App = () => {
         path="/chat"
         element={<Chat chatNode={"global"} userID={userID} />}
       />
+      <Route path="/home" element={<Home />}></Route>
     </Routes>
   );
 };
