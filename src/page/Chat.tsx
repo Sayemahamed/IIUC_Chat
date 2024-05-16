@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { database } from "../firebase/config";
 import { get, onValue, push, ref } from "firebase/database";
-import { Grid, TextField } from "@mui/material";
+import { Divider, Grid, IconButton, InputBase, Paper } from "@mui/material";
+import DirectionsIcon from "@mui/icons-material/Directions";
 import ChatNode from "../Components/ChatNode";
 
 interface userType {
@@ -59,36 +60,41 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
           />
         ))}
       </Grid>
-      <TextField
-        onChange={(event) => setChatData(event.target.value)}
-        onKeyDown={(event) => {
-          if (event.key === "Enter" && chatData.trim() !== "") {
-            push(ref(database, chatNode), {
-              uid: userData.uid,
-              avatar: userData.photoURL,
-              name: userData.name,
-              message: chatData,
-              image: "",
-            });
-            setChatData("");
-          }
-        }}
-        multiline
-        fullWidth
+      <Paper
         sx={{
+          p: "2px 4px",
+          display: "flex",
+          alignItems: "center",
+          bottom: 0,
           position: "fixed",
-          bottom: "0",
-          my: 2,
-          mx: "auto",
-          color: "white",
+          width: "98%",
         }}
-        focused={chatData !== ""}
-        value={chatData}
-        color="success"
-        id="standard-basic"
-        label="Type Your message"
-        variant="filled"
-      />
+      >
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          placeholder="Enter your message"
+          onChange={(event) => setChatData(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter" && chatData.trim() !== "") {
+              push(ref(database, chatNode), {
+                uid: userData.uid,
+                avatar: userData.photoURL,
+                name: userData.name,
+                message: chatData,
+                image: "",
+              });
+              setChatData("");
+            }
+          }}
+          color="success"
+          id="standard-basic"
+          value={chatData}
+        />
+        <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+        <IconButton color="primary" sx={{ p: "10px" }}>
+          <DirectionsIcon />
+        </IconButton>
+      </Paper>
     </>
   );
 };
