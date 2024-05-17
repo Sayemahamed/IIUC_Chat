@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { database } from "../firebase/config";
 import { get, onValue, push, ref } from "firebase/database";
@@ -19,6 +19,7 @@ interface chatType {
   image: string;
 }
 const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [userData, setUserData] = useState<userType>({
     name: "",
     uid: "",
@@ -26,7 +27,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
     email: "",
   });
   const [chatNodeData, setChatNodeData] = useState<chatType[]>([]);
-  const [chatData, setChatData] = useState("");
+  const [chatData, setChatData] = useState<string>("");
   const navigation = useNavigate();
   useEffect(() => {
     get(ref(database, "users/" + userID)).then((snapshot) => {
@@ -49,9 +50,9 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
   return (
     <>
       <Grid container gap={1}>
-        {chatNodeData.map((data) => (
+        {chatNodeData.map((data, index) => (
           <ChatNode
-            key={data.uid}
+            key={data.uid + index}
             avatar={data.avatar}
             name={data.name}
             message={data.message}
@@ -67,7 +68,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
               alignItems: "center",
               bottom: 0,
               position: "fixed",
-              width: "95%",
+              width: "90%",
             }}
           >
             <InputBase
@@ -91,7 +92,17 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
               value={chatData}
             />
             <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-            <IconButton color="primary" sx={{ p: "10px" }}>
+            <IconButton
+              onClick={() => inputRef.current?.click()}
+              color="primary"
+              sx={{ p: "10px" }}
+            >
+              <input
+                style={{ display: "none" }}
+                type="file"
+                accept="image"
+                ref={inputRef}
+              />
               <AddIcon />
             </IconButton>
           </Paper>
