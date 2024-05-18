@@ -1,3 +1,5 @@
+import { storage } from "../firebase/config";
+import { ref as storageRef, getDownloadURL } from "firebase/storage";
 import {
   Avatar,
   Card,
@@ -7,18 +9,27 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 
 const ChatNode = ({
   avatar,
   name,
   message,
-  image,
+  imageName,
 }: {
   avatar: string;
   name: string;
   message: string;
-  image: string;
+  imageName: string;
 }) => {
+  const [image, setImage] = useState<string>();
+  useEffect(() => {
+    if (imageName.length > 0) {
+      getDownloadURL(storageRef(storage, imageName)).then((url) => {
+        setImage(url);
+      });
+    }
+  }, []);
   return (
     <Grid item xs={12} md={11} lg={10} sx={{ mx: "auto" }}>
       <Card

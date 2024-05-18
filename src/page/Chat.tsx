@@ -70,7 +70,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
             avatar={data.avatar}
             name={data.name}
             message={data.message}
-            image={data.image}
+            imageName={data.image}
           />
         ))}
         <Grid item xs={12}>
