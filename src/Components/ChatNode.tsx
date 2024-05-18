@@ -29,7 +29,7 @@ const ChatNode = ({
         setImage(url);
       });
     }
-  }, []);
+  }, [imageName]);
   return (
     <Grid item xs={12} md={11} lg={10} sx={{ mx: "auto" }}>
       <Card
