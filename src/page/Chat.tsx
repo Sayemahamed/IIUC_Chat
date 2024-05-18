@@ -50,6 +50,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
     });
   }, []);
   const chatWithImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files === null) return;
     const file = await event.target.files![0];
     const UUID = await uuidv4();
     await uploadBytes(storageRef(storage, UUID), file);
