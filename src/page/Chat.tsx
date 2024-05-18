@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { database } from "../firebase/config";
 import { get, onValue, push, ref } from "firebase/database";
+import{}from "firebase/storage"
+import { v4 as uuidv4 } from "uuid";
 import { Divider, Grid, IconButton, InputBase, Paper } from "@mui/material";
 import ChatNode from "../Components/ChatNode";
 import AddIcon from "@mui/icons-material/Add";
@@ -47,6 +49,9 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
       }
     });
   }, []);
+  const chatWithImage=(event:React.ChangeEvent<HTMLInputElement>)=>{
+
+  }
   return (
     <>
       <Grid container gap={1}>
@@ -59,7 +64,6 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
             image={data.image}
           />
         ))}
-
         <Grid item xs={12}>
           <Paper
             sx={{
@@ -81,7 +85,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
                     uid: userData.uid,
                     avatar: userData.photoURL,
                     name: userData.name,
-                    message: chatData,
+                    message: chatData.trim(),
                     image: "",
                   });
                   setChatData("");
@@ -102,6 +106,9 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
                 type="file"
                 accept="image"
                 ref={inputRef}
+                onChange={(event) => { 
+                  chatWithImage(event);
+                }}
               />
               <AddIcon />
             </IconButton>
