@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { database } from "../firebase/config";
+import { database, storage } from "../firebase/config";
 import { get, onValue, push, ref } from "firebase/database";
-import{}from "firebase/storage"
+import { uploadBytes, ref as storageRef } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { Divider, Grid, IconButton, InputBase, Paper } from "@mui/material";
 import ChatNode from "../Components/ChatNode";
@@ -49,9 +49,18 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
       }
     });
   }, []);
-  const chatWithImage=(event:React.ChangeEvent<HTMLInputElement>)=>{
-
-  }
+  const chatWithImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files![0];
+    const UUID = uuidv4();
+    uploadBytes(storageRef(storage, UUID), file);
+    push(ref(database, chatNode), {
+      uid: userData.uid,
+      avatar: userData.photoURL,
+      name: userData.name,
+      message: chatData.trim(),
+      image: UUID,
+    });
+  };
   return (
     <>
       <Grid container gap={1}>
@@ -106,7 +115,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
                 type="file"
                 accept="image"
                 ref={inputRef}
-                onChange={(event) => { 
+                onChange={(event) => {
                   chatWithImage(event);
                 }}
               />
