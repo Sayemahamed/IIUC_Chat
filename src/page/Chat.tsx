@@ -54,6 +54,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
     const file = await event.target.files![0];
     const UUID = await uuidv4();
     await uploadBytes(storageRef(storage, UUID), file);
+    setChatData("");
     await push(ref(database, chatNode), {
       uid: userData.uid,
       avatar: userData.photoURL,
@@ -61,7 +62,6 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
       message: chatData.trim(),
       image: UUID,
     });
-    await setChatData("");
   };
   return (
     <>
