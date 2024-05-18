@@ -61,6 +61,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
       message: chatData.trim(),
       image: UUID,
     });
+    await setChatData("");
   };
   return (
     <>
