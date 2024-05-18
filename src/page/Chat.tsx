@@ -49,11 +49,11 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
       }
     });
   }, []);
-  const chatWithImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files![0];
-    const UUID = uuidv4();
-    uploadBytes(storageRef(storage, UUID), file);
-    push(ref(database, chatNode), {
+  const chatWithImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = await event.target.files![0];
+    const UUID = await uuidv4();
+    await uploadBytes(storageRef(storage, UUID), file);
+    await push(ref(database, chatNode), {
       uid: userData.uid,
       avatar: userData.photoURL,
       name: userData.name,

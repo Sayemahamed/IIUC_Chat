@@ -22,14 +22,14 @@ const ChatNode = ({
   message: string;
   imageName: string;
 }) => {
-  const [image, setImage] = useState<string>();
+  const [image, setImage] = useState<string>("");
   useEffect(() => {
     if (imageName.length > 0) {
       getDownloadURL(storageRef(storage, imageName)).then((url) => {
         setImage(url);
       });
     }
-  }, [imageName]);
+  }, []);
   return (
     <Grid item xs={12} md={11} lg={10} sx={{ mx: "auto" }}>
       <Card
