@@ -1,12 +1,12 @@
 import { Autocomplete, Grid, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import { get, ref } from "firebase/database";
+import { get, onValue, ref } from "firebase/database";
 import { database } from "../firebase/config";
 import userType from "../Interfaces/userType";
 export default function Home() {
   const [users, setUsers] = useState<userType[]>([]);
   useEffect(() => {
-    get(ref(database, "users")).then((snapshot) => {
+    onValue(ref(database, "users"),(snapshot) => {
       if (snapshot.exists()) {
         setUsers(Object.values(snapshot.val()));
       }
