@@ -7,17 +7,9 @@ import { v4 as uuidv4 } from "uuid";
 import { Divider, Grid, IconButton, InputBase, Paper } from "@mui/material";
 import ChatNode from "../Components/ChatNode";
 import AddIcon from "@mui/icons-material/Add";
-interface userType {
-  name: string;
-  uid: string;
-  photoURL: string;
-  email: string;
-}
-interface chatType {
-  uid: string;
-  message: string;
-  image: string;
-}
+import userType from "../Interfaces/userType";
+import chatType from "../Interfaces/chatType";
+
 const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [userData, setUserData] = useState<userType>({
@@ -65,9 +57,9 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
         {chatNodeData.map((data, index) => (
           <ChatNode
             key={data.uid + index}
-            uuid={data.uid}
+            uid={data.uid}
             message={data.message}
-            imageName={data.image}
+            image={data.image}
           />
         ))}
         <Grid item xs={12}>

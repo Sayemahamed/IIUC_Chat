@@ -1,6 +1,7 @@
 import { storage, database } from "../firebase/config";
 import { ref as storageRef, getDownloadURL } from "firebase/storage";
 import { ref as databaseRef, get } from "firebase/database";
+import chatType from "../Interfaces/chatType";
 import {
   Avatar,
   Card,
@@ -12,29 +13,21 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 
-const ChatNode = ({
-  uuid,
-  message,
-  imageName,
-}: {
-  uuid: string;
-  message: string;
-  imageName: string;
-}) => {
-  const [image, setImage] = useState<string>("");
+const ChatNode = ({ uid, message, image }: chatType) => {
+  const [imageURL, setImageURL] = useState<string>("");
   const [avatar, setAvatar] = useState<string>("");
   const [name, setName] = useState<string>("");
   useEffect(() => {
-    if (imageName.length > 0) {
-      getDownloadURL(storageRef(storage, imageName)).then((url) => {
-        setImage(url);
+    if (image.length > 0) {
+      getDownloadURL(storageRef(storage, image)).then((url) => {
+        setImageURL(url);
       });
     }
   }, []);
 
   useEffect(() => {
-    if (uuid.length > 0) {
-      get(databaseRef(database, "users/" + uuid)).then((snapshot) => {
+    if (uid.length > 0) {
+      get(databaseRef(database, "users/" + uid)).then((snapshot) => {
         if (snapshot.exists()) {
           setAvatar(snapshot.val().photoURL);
           setName(snapshot.val().name);
@@ -58,7 +51,9 @@ const ChatNode = ({
           titleTypographyProps={{ color: "white" }}
           title={name}
         ></CardHeader>
-        {image && <CardMedia component={"img"} image={image} height={300} />}
+        {imageURL && (
+          <CardMedia component={"img"} image={imageURL} height={300} />
+        )}
         <CardContent>
           {message && (
             <Typography
