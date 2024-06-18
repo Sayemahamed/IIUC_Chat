@@ -58,6 +58,9 @@ const Chat = ({ userID }: { userID: string }) => {
             image={data.image}
           />
         ))}
+        {
+          chatNode==="temp"&&<Grid item xs={12}><h1>Wait..</h1></Grid>
+        }
         <Grid item xs={12}>
           <Paper
             sx={{
