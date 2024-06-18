@@ -9,11 +9,12 @@ import ChatNode from "../Components/ChatNode";
 import AddIcon from "@mui/icons-material/Add";
 import chatType from "../Interfaces/chatType";
 
-const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
+const Chat = ({ userID }: { userID: string }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [chatNodeData, setChatNodeData] = useState<chatType[]>([]);
   const [chatData, setChatData] = useState<string>("");
+  const chatNode = "global";
   const navigation = useNavigate();
   useEffect(() => {
     if (userID === "") navigation("/");
