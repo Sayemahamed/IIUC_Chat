@@ -40,14 +40,12 @@ export default function Home({ userID }: { userID: string }) {
     });
   }, []);
   useEffect(() => {
-    setUsers(
-      users.filter(
-        (user) =>
-          user.uid !== userData.uid &&
-          !userData.friends.some((friend) => friend.uid === user.uid)
-      )
-    );
-  }, [userData.friends]);
+    setUsers((data) => data.filter((d) => d.uid !== userID));
+    if (userData?.friends)
+      setUsers((data) =>
+        data.filter((d) => !userData?.friends?.some((f) => f.uid === d.uid))
+      );
+  }, [userData?.friends]);
 
   return (
     <Grid container spacing={2}>
@@ -78,7 +76,7 @@ export default function Home({ userID }: { userID: string }) {
                 // console.log(value.uid + " " + userID + " " + chatNode);
                 update(ref(database, "users/" + value.uid), {
                   friends: [
-                    ...value.friends,
+                    ...(value.friends || []),
                     {
                       uid: userID,
                       chatNode: chatNode,
@@ -89,7 +87,7 @@ export default function Home({ userID }: { userID: string }) {
                 });
                 update(ref(database, "users/" + userID), {
                   friends: [
-                    ...userData.friends,
+                    ...(userData.friends || []),
                     {
                       uid: value.uid,
                       chatNode: chatNode,

@@ -26,12 +26,7 @@ const Welcome = () => {
               name: user.displayName,
               email: user.email,
               photoURL: user.photoURL,
-              friends: [
-                {
-                  uid: "",
-                  chatNode: "",
-                },
-              ],
+              friends: [],
             });
           } else {
             update(ref(database, "users/" + user.uid), {
