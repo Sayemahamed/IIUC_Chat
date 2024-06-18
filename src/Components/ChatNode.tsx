@@ -1,5 +1,6 @@
-import { storage } from "../firebase/config";
+import { storage, database } from "../firebase/config";
 import { ref as storageRef, getDownloadURL } from "firebase/storage";
+import { ref as databaseRef, get } from "firebase/database";
 import {
   Avatar,
   Card,
@@ -12,21 +13,32 @@ import {
 import { useEffect, useState } from "react";
 
 const ChatNode = ({
-  avatar,
-  name,
+  uuid,
   message,
   imageName,
 }: {
-  avatar: string;
-  name: string;
+  uuid: string;
   message: string;
   imageName: string;
 }) => {
   const [image, setImage] = useState<string>("");
+  const [avatar, setAvatar] = useState<string>("");
+  const [name, setName] = useState<string>("");
   useEffect(() => {
     if (imageName.length > 0) {
       getDownloadURL(storageRef(storage, imageName)).then((url) => {
         setImage(url);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (uuid.length > 0) {
+      get(databaseRef(database, "users/" + uuid)).then((snapshot) => {
+        if (snapshot.exists()) {
+          setAvatar(snapshot.val().photoURL);
+          setName(snapshot.val().name);
+        }
       });
     }
   }, []);

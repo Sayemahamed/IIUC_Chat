@@ -15,8 +15,6 @@ interface userType {
 }
 interface chatType {
   uid: string;
-  avatar: string;
-  name: string;
   message: string;
   image: string;
 }
@@ -57,8 +55,6 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
     setChatData("");
     await push(ref(database, chatNode), {
       uid: userData.uid,
-      avatar: userData.photoURL,
-      name: userData.name,
       message: chatData.trim(),
       image: UUID,
     });
@@ -69,8 +65,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
         {chatNodeData.map((data, index) => (
           <ChatNode
             key={data.uid + index}
-            avatar={data.avatar}
-            name={data.name}
+            uuid={data.uid}
             message={data.message}
             imageName={data.image}
           />
@@ -94,8 +89,6 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
                 if (event.key === "Enter" && chatData.trim() !== "") {
                   push(ref(database, chatNode), {
                     uid: userData.uid,
-                    avatar: userData.photoURL,
-                    name: userData.name,
                     message: chatData.trim(),
                     image: "",
                   });
