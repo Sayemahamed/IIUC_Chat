@@ -102,8 +102,9 @@ export default function Home({ userID }: { userID: string }) {
           />
         </Paper>
       </Grid>
+      <Grid item xs={12} sx={{ marginTop: "50px" }}></Grid>
       {userData?.friends?.map((friend) => (
-          <FriendNode key={friend.uid} uid={friend.uid} />
+        <FriendNode key={friend.uid} uid={friend.uid} />
       ))}
     </Grid>
   );

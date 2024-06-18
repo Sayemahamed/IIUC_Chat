@@ -1,10 +1,8 @@
 import {
   Avatar,
   Card,
-  CardContent,
   CardHeader,
   Grid,
-  Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { database } from "../firebase/config";
