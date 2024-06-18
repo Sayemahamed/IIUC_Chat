@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { database, storage } from "../firebase/config";
 import { onValue, push, ref } from "firebase/database";
 import { uploadBytes, ref as storageRef } from "firebase/storage";
@@ -14,16 +14,27 @@ const Chat = ({ userID }: { userID: string }) => {
 
   const [chatNodeData, setChatNodeData] = useState<chatType[]>([]);
   const [chatData, setChatData] = useState<string>("");
-  const chatNode = "global";
+  const [chatNode, setChatNode] = useState<string>("temp");
+  const [URL, setURL] = useSearchParams();
   const navigation = useNavigate();
   useEffect(() => {
+    if (
+      typeof URL.get("node") === "string" &&
+      String(URL.get("node")).length > 0
+    ) {
+      setChatNode(String(URL.get("node")));
+      console.log(chatNode);
+    }
+  }, [URL, setURL]);
+  useEffect(() => {
     if (userID === "") navigation("/");
-    onValue(ref(database, chatNode), (snapshot) => {
-      if (snapshot.exists()) {
-        setChatNodeData(Object.values(snapshot.val()));
-      }
-    });
-  }, []);
+    if (chatNode !== "temp")
+      onValue(ref(database, chatNode), (snapshot) => {
+        if (snapshot.exists()) {
+          setChatNodeData(Object.values(snapshot.val()));
+        }
+      });
+  }, [chatNode]);
   const chatWithImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files === null) return;
     const file = await event.target.files![0];

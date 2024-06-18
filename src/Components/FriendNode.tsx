@@ -4,7 +4,13 @@ import { database } from "../firebase/config";
 import { get, ref } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 
-export let FriendNode = ({ uid }: { uid: string }) => {
+export let FriendNode = ({
+  uid,
+  chatNode,
+}: {
+  uid: string;
+  chatNode: string;
+}) => {
   const [avatar, setAvatar] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -28,8 +34,7 @@ export let FriendNode = ({ uid }: { uid: string }) => {
         variant="elevation"
         elevation={20}
         onClick={() => {
-          console.log(name);
-          navigation("/chat");
+          navigation("/chat/" + "?node=" + chatNode);
         }}
       >
         <CardHeader
