@@ -1,37 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { database, storage } from "../firebase/config";
-import { get, onValue, push, ref } from "firebase/database";
+import { onValue, push, ref } from "firebase/database";
 import { uploadBytes, ref as storageRef } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { Divider, Grid, IconButton, InputBase, Paper } from "@mui/material";
 import ChatNode from "../Components/ChatNode";
 import AddIcon from "@mui/icons-material/Add";
-import userType from "../Interfaces/userType";
 import chatType from "../Interfaces/chatType";
 
 const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [userData, setUserData] = useState<userType>({
-    name: "",
-    uid: "",
-    photoURL: "",
-    email: "",
-  });
+
   const [chatNodeData, setChatNodeData] = useState<chatType[]>([]);
   const [chatData, setChatData] = useState<string>("");
   const navigation = useNavigate();
   useEffect(() => {
-    get(ref(database, "users/" + userID)).then((snapshot) => {
-      if (snapshot.exists()) {
-        setUserData({
-          name: snapshot.val().name,
-          uid: snapshot.val().uid,
-          photoURL: snapshot.val().photoURL,
-          email: snapshot.val().email,
-        });
-      } else navigation("/");
-    });
     if (userID === "") navigation("/");
     onValue(ref(database, chatNode), (snapshot) => {
       if (snapshot.exists()) {

@@ -73,7 +73,7 @@ const Welcome = () => {
       </Grid>
       <Grid item>
         {authenticated ? (
-          <Link to={"/chat"}>
+          <Link to={"/home"}>
             <Button size="large" variant="contained" color="success">
               Enter
             </Button>

@@ -24,7 +24,7 @@ const App = () => {
         path="/chat"
         element={<Chat chatNode={"global"} userID={userID} />}
       />
-      <Route path="/home" element={<Home />}></Route>
+      <Route path="/home" element={<Home userID={userID} />}></Route>
     </Routes>
   );
 };

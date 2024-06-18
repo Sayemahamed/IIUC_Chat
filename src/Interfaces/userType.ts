@@ -3,4 +3,5 @@ export default interface userType {
     uid: string;
     photoURL: string;
     email: string;
+    friends: string[];
 }
