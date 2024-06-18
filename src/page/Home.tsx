@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { database } from "../firebase/config";
 import userType from "../Interfaces/userType";
 import { useNavigate } from "react-router-dom";
+import { FriendNode } from "../Components/FriendNode";
 export default function Home({ userID }: { userID: string }) {
   const [users, setUsers] = useState<userType[]>([]);
   const [userData, setUserData] = useState<userType>({
@@ -48,7 +49,7 @@ export default function Home({ userID }: { userID: string }) {
   }, [userData?.friends]);
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} gap={0}>
       <Grid item xs={12}>
         <Paper
           sx={{
@@ -101,6 +102,9 @@ export default function Home({ userID }: { userID: string }) {
           />
         </Paper>
       </Grid>
+      {userData?.friends?.map((friend) => (
+          <FriendNode key={friend.uid} uid={friend.uid} />
+      ))}
     </Grid>
   );
 }
