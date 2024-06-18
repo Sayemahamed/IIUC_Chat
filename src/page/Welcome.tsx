@@ -5,15 +5,15 @@ import { Button, Grid } from "@mui/material";
 import { database } from "../firebase/config";
 import {
   GoogleAuthProvider,
-  signInWithRedirect,
   onAuthStateChanged,
+  signInWithPopup,
 } from "firebase/auth";
 import { ref, get, set, update } from "firebase/database";
 const Welcome = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(true);
 
   const getAuth = async () => {
-    await signInWithRedirect(auth, new GoogleAuthProvider());
+    await signInWithPopup(auth, new GoogleAuthProvider());
   };
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -27,7 +27,6 @@ const Welcome = () => {
               email: user.email,
               photoURL: user.photoURL,
               friends: [],
-              conversations: ["global"],
             });
           } else {
             update(ref(database, "users/" + user.uid), {
