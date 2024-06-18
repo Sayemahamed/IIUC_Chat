@@ -11,7 +11,12 @@ export default function Home({ userID }: { userID: string }) {
     uid: "",
     photoURL: "",
     email: "",
-    friends: [],
+    friends: [
+      {
+        uid: "",
+        chatNode: "",
+      },
+    ],
   });
   const navigation = useNavigate();
   useEffect(() => {

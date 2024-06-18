@@ -30,7 +30,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
     await uploadBytes(storageRef(storage, UUID), file);
     setChatData("");
     await push(ref(database, chatNode), {
-      uid: userData.uid,
+      uid: userID,
       message: chatData.trim(),
       image: UUID,
     });
@@ -64,7 +64,7 @@ const Chat = ({ userID, chatNode }: { userID: string; chatNode: string }) => {
               onKeyDown={(event) => {
                 if (event.key === "Enter" && chatData.trim() !== "") {
                   push(ref(database, chatNode), {
-                    uid: userData.uid,
+                    uid: userID,
                     message: chatData.trim(),
                     image: "",
                   });
