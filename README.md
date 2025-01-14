@@ -1,30 +1,73 @@
-# React + TypeScript + Vite
+# IIUC Chat  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+IIUC Chat is a feature-rich chatting application developed as part of an academic project. It showcases real-time communication capabilities and modern design principles using cutting-edge web technologies.  
 
-Currently, two official plugins are available:
+## Features  
+- Real-time chatting with seamless updates  
+- Responsive and modern user interface  
+- Secure and scalable backend powered by Firebase  
+- Built with TypeScript for type safety and reliability  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used  
+- **React**: For building the user interface  
+- **Firebase**: For authentication, real-time database, and hosting  
+- **TypeScript**: For improved code quality and maintainability  
+- **Vite**: For lightning-fast development and optimized builds  
 
-## Expanding the ESLint configuration
+## Getting Started  
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Prerequisites  
+To run this project locally, you need:  
+- Node.js (v14 or later)  
+- Firebase account for configuration  
 
-- Configure the top-level `parserOptions` property like this:
+### Installation  
+1. Clone the repository:  
+   ```bash  
+   git clone https://github.com/Sayemahamed/IIUC_Chat.git  
+   cd IIUC_Chat  
+   ```  
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+2. Install dependencies:  
+   ```bash  
+   npm install  
+   ```  
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+3. Configure Firebase:  
+   - Set up a Firebase project at [Firebase Console](https://console.firebase.google.com).  
+   - Add your Firebase configuration to the `.env` file. Example:  
+     ```env  
+     VITE_FIREBASE_API_KEY=your-api-key  
+     VITE_FIREBASE_AUTH_DOMAIN=your-auth-domain  
+     VITE_FIREBASE_PROJECT_ID=your-project-id  
+     VITE_FIREBASE_STORAGE_BUCKET=your-storage-bucket  
+     VITE_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id  
+     VITE_FIREBASE_APP_ID=your-app-id  
+     ```  
+
+4. Start the development server:  
+   ```bash  
+   npm run dev  
+   ```  
+
+### Build for Production  
+To create an optimized production build, run:  
+```bash  
+npm run build  
+```  
+
+## Live Demo  
+Check out the live application: [IIUC Chat](https://iiucchat.web.app/)  
+
+## Contributions  
+Contributions are welcome!  
+Feel free to fork the repository, create feature branches, and submit pull requests.  
+
+## License  
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/Sayemahamed/IIUC_Chat/blob/main/LICENSE) file for details.  
+
+## Contact  
+Author: Md Iftaker Ahamed Sayem  
+Email: [sayemahamed183@gmail.com](mailto:sayemahamed183@gmail.com)  
+
+---
